@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <cmath>
 #include "Vector3n.h"
 namespace Engine {
 	// Constructors
@@ -93,6 +94,42 @@ namespace Engine {
 
 	float Vector3n::dot(const Vector3n& v) const {
 		return x * v.x + y * v.y + z * v.z;
+	}
+
+	// Cross product
+	Vector3n Vector3n::cross(const Vector3n& v) const {
+		return Vector3n(
+			y * v.z - z * v.y, 
+			z * v.x - x * v.z, 
+			x * v.y - y * v.x
+		);
+	}
+
+	void Vector3n::operator %=(const Vector3n& v) {
+		*this = cross(v);
+	}
+
+	Vector3n Vector3n::operator %(const Vector3n& v) const {
+		return cross(v);
+	}
+
+	// magnitude
+	float Vector3n::magnitude() {
+		float magnitude = std::sqrt(x * x + y * y + z * z);
+		return magnitude;
+	}
+
+	// Unit vector
+	void Vector3n::normalize() {
+		float mag = magnitude();
+
+		if (mag > 0.0f) {
+			float oneOverMag = 1.0f / mag;
+
+			x *= oneOverMag;
+			y *= oneOverMag;
+			z *= oneOverMag;
+		}
 	}
 }
 

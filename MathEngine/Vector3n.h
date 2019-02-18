@@ -42,6 +42,17 @@ namespace Engine {
 		// dot product
 		float operator *(const Vector3n& v) const;
 		float dot(const Vector3n& v) const;
+
+		// Cross product
+		Vector3n cross(const Vector3n& v) const;
+		void operator %=(const Vector3n& v);
+		Vector3n operator %(const Vector3n& v) const;
+
+		// magnitude
+		float magnitude();
+
+		// unit vector (normalization)
+		void normalize();
 	};
 }
 
